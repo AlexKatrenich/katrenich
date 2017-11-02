@@ -1,4 +1,4 @@
-package grep;
+package katrenich.grep;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,11 +12,6 @@ import java.util.regex.Pattern;
 
 public class grepC {
     public static void main(String[] args) {
-        if(args != null && args.length == 1){
-
-        } else {
-            System.out.println("Задайте один аргумент для виконання програми");
-        }
     }
 
     private boolean checkText(String data, String args){

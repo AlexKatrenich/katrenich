@@ -1,10 +1,15 @@
-package short_tests2;
-
+package katrenich.short_tests;
 import java.util.Arrays;
 
+/** Завдання: написати додаток, що вирішуватиме наступні задачі:
+ *  1) перевертає рядок(наприклад: abcde після перетворення буде edcba)
+ *  2) перевіряє чи є два рядки анаграмами (Наприклад рядки:  мука - кума, літо - тіло)
+ */
 
 
 public class StringReverse {
+
+    //
     public static String reverse(String msg){
         msg = msg.toLowerCase();
         StringBuilder sb = new StringBuilder();

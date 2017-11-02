@@ -1,4 +1,4 @@
-package grep;
+package katrenich.grep;
 
 import java.io.BufferedReader;
 import java.io.IOException;
