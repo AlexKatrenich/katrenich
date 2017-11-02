@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 public class StringReverse {
 
-    //
+    // метод читає рядок поданий на вході та повертає перевернутий рядок
     public static String reverse(String msg){
         msg = msg.toLowerCase();
         StringBuilder sb = new StringBuilder();
@@ -19,6 +19,8 @@ public class StringReverse {
         return sb.toString();
     }
 
+    // метод порівнює кількість букв в кожному слові(порівнюється кількість членів кожної букви).
+    // повертає істину якщо всі кількості збігаються
     public static boolean isAnnagrams(String s1, String s2){
         if (s1.length() == s2.length()){
             s1 = s1.toLowerCase();
@@ -27,19 +29,10 @@ public class StringReverse {
             char[] text1 = s1.toCharArray();
             char[] text2 = s2.toCharArray();
 
-            Thread thread1 = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    sort(text1);
-                }
-            });
+            // масиви літер кожного рядка сортуються в паралельних потоках виконання
+            Thread thread1 = new Thread( () -> sort(text1));
             thread1.start();
-            Thread thread2 = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    sort(text2);
-                }
-            });
+            Thread thread2 = new Thread(() -> sort(text2));
             thread2.start();
 
             try {
@@ -49,6 +42,7 @@ public class StringReverse {
                 e.printStackTrace();
             }
 
+            // результат порівняння відсортованих масивів повертається як результат виконання метода
             return Arrays.equals(text1, text2);
 
         }
@@ -56,6 +50,7 @@ public class StringReverse {
         return false;
     }
 
+    // метод сортує масив символів методом бульбашки
     private static void sort(char[] text) {
         for (int i = 0; i < text.length ; i++) {
             for (int j = 0; j < text.length - i - 1; j++) {
