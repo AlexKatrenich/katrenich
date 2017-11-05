@@ -1,4 +1,4 @@
-package katrenich.short_tests;
+package katrenich;
 import java.util.Arrays;
 
 /** Завдання: написати додаток, що вирішуватиме наступні задачі:
