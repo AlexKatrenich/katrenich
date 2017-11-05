@@ -1,4 +1,4 @@
-package katrenich;
+package katrenich.tests;
 
 
 import java.io.BufferedReader;
