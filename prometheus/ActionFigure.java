@@ -4,5 +4,7 @@ public enum ActionFigure {
 	//нулик
 	NOUGHT, 
 	//хрестик
-	CROSS
+	CROSS,
+	//пуста клітинка
+	NOTHING
 }
