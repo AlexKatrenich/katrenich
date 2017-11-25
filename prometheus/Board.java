@@ -44,11 +44,11 @@ public class Board {
 		System.out.println("-------------");
 		System.out.print("  ");
 		for (int i = 0; i < sizeBoard; i++) {
-			System.out.print(" " + (i+1));
+			System.out.print(" " + (i));
 		}
 		System.out.println();
 		for (int i = 0; i < sizeBoard; i++) {
-			System.out.print((i+1) + " |");
+			System.out.print((i) + " |");
 			for (int j = 0; j < sizeBoard ; j++) {
 				switch (board[i][j]){
 					case CROSS:
@@ -65,7 +65,14 @@ public class Board {
 			}
 			System.out.println();
 		}
-		System.out.println("-------------");
+	}
+
+	public ActionFigure getCell(int x, int y){
+		return board[y][x];
+	}
+
+	public void setCell(int x, int y, ActionFigure figure){
+		board[y][x] = figure;
 	}
 
 }
