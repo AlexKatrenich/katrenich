@@ -1,6 +1,8 @@
 package katrenich.prometheus;
 
 
+import katrenich.prometheus.exceptions.RefereePutException;
+
 public class Referee {
 
 	//метод записує до дошки фігуру, інакше повертає помилку

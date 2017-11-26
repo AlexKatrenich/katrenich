@@ -1,4 +1,4 @@
-package katrenich.prometheus;
+package katrenich.prometheus.exceptions;
 
 /**
  * Created by Alex on 24.11.2017.

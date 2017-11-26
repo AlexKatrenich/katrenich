@@ -1,10 +1,12 @@
 package katrenich.prometheus;
 
 
-public class Player {
+import katrenich.prometheus.interfaces.Player;
+
+public class ComputerPlayer implements Player{
 	private ActionFigure figure;
 
-	public Player(ActionFigure figure) {
+	public ComputerPlayer(ActionFigure figure) {
 		this.figure = figure;
 	}
 
@@ -16,6 +18,7 @@ public class Player {
 		 *     б) else if якщо центр наш - ставимо фігур в будь-яку вільну середню лінію/діагональ.
 		 *     в) else ставимо фішку в будь-яке вільне поле
 		 */
+		@Override
 	public Move turn(Board board) {
 		Move move = new Move();
 		move.setFigure(figure);
