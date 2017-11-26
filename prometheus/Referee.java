@@ -15,18 +15,14 @@ public class Referee {
 	// метод перевіряє чи був хід виграшним
 	public boolean isWin(Move move, Board board) {
 		ActionFigure figure = move.getFigure();
-		int column = move.getX();
-		int line = move.getY();
+		int line = move.getX();
+		int column = move.getY();
 		int count = 0;
-
-		if(board.getCell(move.getX(), move.getY()) == null || board.getCell(move.getX(), move.getY()) != ActionFigure.NOTHING){
-			throw new RefereePutException("Can't write figure: " + move.getFigure() + " on board");
-		}
 
 		// Перевірка рядка на співпадіння всіх символів
 		for (int i = 0; i < board.getSizeBoard() ; i++) {
 			if(i != column){
-				if(figure == board.getCell(i, line)){
+				if(figure == board.getCell(line, i)){
 					count++;
 				}
 			}
@@ -41,7 +37,7 @@ public class Referee {
 		// перевірка значень в стовпці
 		for (int i = 0; i < board.getSizeBoard() ; i++) {
 			if(i != line){
-				if(figure == board.getCell(column, i)){
+				if(figure == board.getCell(i, column)){
 					count++;
 				}
 			}
@@ -78,7 +74,7 @@ public class Referee {
 					j++;
 					continue;
 				} else {
-					if(figure == board.getCell(i, j)){
+					if(figure == board.getCell(j, i)){
 						count++;
 					}
 				}

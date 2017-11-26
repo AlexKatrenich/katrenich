@@ -30,12 +30,12 @@ public class Board {
 		int size = sizeBoard*sizeBoard;
 		for (int i = 0; i < sizeBoard ; i++) {
 			for (int j = 0; j < sizeBoard; j++) {
-				if(board[i][j] != null){
+				if(board[i][j] != ActionFigure.NOTHING){
 					count++;
 				}
 			}
 		}
-		System.out.println(count);
+
 		return (count + 2) <= size;
 	}
 
@@ -68,11 +68,11 @@ public class Board {
 	}
 
 	public ActionFigure getCell(int x, int y){
-		return board[y][x];
+		return board[x][y];
 	}
 
 	public void setCell(int x, int y, ActionFigure figure){
-		board[y][x] = figure;
+		board[x][y] = figure;
 	}
 
 }
