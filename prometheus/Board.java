@@ -41,7 +41,6 @@ public class Board {
 
 	// Метод виводить гральну дошку в консоль
 	public void print() {
-		System.out.println("-------------");
 		System.out.print("  ");
 		for (int i = 0; i < sizeBoard; i++) {
 			System.out.print(" " + (i));

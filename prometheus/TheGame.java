@@ -1,15 +1,19 @@
 package katrenich.prometheus;
 
 import katrenich.prometheus.exceptions.RefereePutException;
+import katrenich.prometheus.interfaces.Player;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class TheGame {
 
 	public static void main(String[] args) {
 		/*
-		 * Створимо гру гравець - комп'ютер. Для цього зробимо можливість гравцеві з клавіатури вводити
-		 * розмір ігрового поля та фігуру, якою він буде грати
+		 * Створимо гру 3-х видів:
+		 * 1) Комп'ютер - комп'ютер
+		 * 2) Гравець - комп'ютер
+		 * 3) Гравець - гравець
 		 * */
 		Scanner scanner = new Scanner(System.in);
 		int gameSchedule = gameSchedule(scanner);
@@ -19,20 +23,20 @@ public class TheGame {
 			Board board = new Board(3);
 
 			// Гравець обирає фігуру, якою буде грати
-			ComputerPlayer computerPlayer1 = new ComputerPlayer(ActionFigure.CROSS);
-			ComputerPlayer computerPlayer2 = new ComputerPlayer(ActionFigure.NOUGHT);
+			Player player1 = new ComputerPlayer(ActionFigure.CROSS);
+			Player player2 = new ComputerPlayer(ActionFigure.NOUGHT);
 
 			Referee referee = new Referee();
 
 			while (board.hasMoreSpace()) {
-
+				System.out.println("-----------");
 				// Гравець 1 робить хід
-				if(playerMove(computerPlayer1, referee, board)){
+				if(playerMove(player1, referee, board)){
 					System.out.println("Переміг гравець 1!");
 				}
-
+				System.out.println("-----------");
 				// Гравець 2 робить хід
-				if(playerMove(computerPlayer2, referee, board)){
+				if(playerMove(player2, referee, board)){
 					System.out.println("Переміг гравець 2!");
 				}
 			}
@@ -44,11 +48,105 @@ public class TheGame {
 
 			// Гравець обирає фігуру, якою буде грати
 			ActionFigure figure = getFigure(scanner);
-			ComputerPlayer computerPlayer1 = new ComputerPlayer(figure);
-			ComputerPlayer computerPlayer2 = new ComputerPlayer(figure == ActionFigure.CROSS ? ActionFigure.NOUGHT : ActionFigure.CROSS);
+			Player player1 = new RealPlayer(figure);
+			// створюється комп'ютерний гравець, що буде грати фігурою протилежною до обраної реальним гравцем
+			Player player2 = new ComputerPlayer(figure == ActionFigure.CROSS ? ActionFigure.NOUGHT : ActionFigure.CROSS);
 
 			Referee referee = new Referee();
+
+			System.out.println("-------------");
+			board.print();
+
+			while (board.hasMoreSpace()) {
+
+				// Зчитуємо з консолі координати ходу реального гравця
+				setMovePlayer((RealPlayer)player1, scanner, board);
+				System.out.println("-------------");
+
+				// хід та перверка ходу першого гравця
+				if(playerMove(player1, referee, board)){
+					System.out.println("Переміг гравець 1!");
+					break;
+				}
+				System.out.println("-------------");
+
+				// хід та перевірка ходу другого гравця
+				if(playerMove(player2, referee, board)){
+					System.out.println("Переміг гравець 2!");
+					break;
+				}
+			}
+
+			System.out.println("Вітаю, Ви зіграли в нічию!");
+
 		} else {
+			// вводимо в консоль розмір ігрового поля
+			int boardSize = getBoardSize(scanner);
+			Board board = new Board(boardSize);
+
+
+			ActionFigure figure = getFigure(scanner);
+
+			Player player1 = new RealPlayer(figure);
+			// створюється комп'ютерний гравець, що буде грати фігурою протилежною до обраної реальним гравцем
+			Player player2 = new RealPlayer(figure == ActionFigure.CROSS ? ActionFigure.NOUGHT : ActionFigure.CROSS);
+
+			Referee referee = new Referee();
+
+			System.out.println("-------------");
+			board.print();
+
+			while (board.hasMoreSpace()) {
+
+				System.out.println("Хід гравця 1");
+				// Зчитуємо з консолі координати ходу реального гравця1
+				setMovePlayer((RealPlayer)player1, scanner, board);
+				System.out.println("-------------");
+
+				// хід та перверка ходу першого гравця
+				if(playerMove(player1, referee, board)){
+					System.out.println("Переміг гравець 1!");
+					break;
+				}
+
+				System.out.println("Хід гравця 2");
+				System.out.println("-------------");
+				// Зчитуємо з консолі координати ходу реального гравця2
+				setMovePlayer((RealPlayer)player2, scanner, board);
+
+				// хід та перевірка ходу другого гравця
+				if(playerMove(player2, referee, board)){
+					System.out.println("Переміг гравець 2!");
+					break;
+				}
+			}
+
+			System.out.println("Вітаю, Ви зіграли в нічию!");
+		}
+
+
+	}
+
+	private static void setMovePlayer(RealPlayer player, Scanner scanner, Board board) {
+		System.out.println("Введіть координати для ходу гравця: 'X' - рядок, 'Y' - стовпчик ");
+
+		while (true){
+			try	{
+				int x = Integer.parseInt(scanner.next());
+				int y = Integer.parseInt(scanner.next());
+				if(y < board.getSizeBoard() && x < board.getSizeBoard()){
+					player.setX(x);
+					player.setY(y);
+ 				} else {
+					throw new IllegalArgumentException();
+				}
+				return;
+			} catch (NumberFormatException e){
+				System.out.println("Невірний формат даних, введіть 2 числа через пробіл");
+			} catch (IllegalArgumentException e){
+				System.out.println("Вказані координати за межами грального поля, введіть 2 числа, що не перевищують " +
+						"розмір поля");
+			}
 
 		}
 
@@ -116,8 +214,8 @@ public class TheGame {
 	/*
 	 * Метод виконує хід гравця та повертає істину, якщо хід був виграшним
 	 */
-	private static boolean playerMove(ComputerPlayer computerPlayer, Referee referee, Board board){
-		Move move = computerPlayer.turn(board);
+	private static boolean playerMove(Player player, Referee referee, Board board){
+		Move move = player.turn(board);
 
 		try {
 			referee.put(move, board);
