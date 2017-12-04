@@ -39,6 +39,7 @@ public class FileLab_LookFor {
 		if(root.isDirectory()){
 			File[] listFiles = root.listFiles();
 			File[] files = new File[]{};
+
 			// перебираються файли в директорії, рекурсивно викликається метод lookForBigImage для кожного файлу,
 			// всі результати об'єднуються в масив, що повертається в результаті
 			for (File file:listFiles) {
