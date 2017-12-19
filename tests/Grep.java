@@ -14,6 +14,7 @@ import java.io.InputStreamReader;
  * Программа не должна учитывать регистр
  * В аргументах может быть передано не одно слово, а несколько
  */
+
 public class Grep {
 	public static void grepB(String[] args){
 		if (args != null && args.length > 0){

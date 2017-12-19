@@ -3,7 +3,6 @@ package katrenich.prometheus;
 import katrenich.prometheus.exceptions.RefereePutException;
 import katrenich.prometheus.interfaces.Player;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class TheGame {

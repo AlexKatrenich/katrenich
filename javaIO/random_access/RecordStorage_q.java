@@ -7,6 +7,7 @@ import java.io.RandomAccessFile;
 /**
   * Kласс, который "делает" из RandomAccessFile - "хранилище для Record" с произвольным доступом:
   */
+
 public class RecordStorage_q implements AutoCloseable {
 	private static final int INT_SIZE_IN_BYTES = 4;
 	private final RandomAccessFile file;

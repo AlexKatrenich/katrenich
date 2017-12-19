@@ -3,16 +3,18 @@ package katrenich.javaIO.random_access;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Random;
-/**
- *
- */
+
+/** 
+  *
+  */
+
 public class Application {
 	private static final int COUNT = 1000;
 
 	public static void main(String[] args) throws IOException {
-		String fileName = "c:/tmp/data.bin";
-		initStorageData(fileName);
-		testStorageData(fileName);
+//		String fileName = "d:/tmp/data.bin";
+//		initStorageData(fileName);
+//		testStorageData(fileName);
 	}
 
 	private static void initStorageData(String fileName) throws IOException {
@@ -26,7 +28,7 @@ public class Application {
 	}
 
 	private static void testStorageData(String fileName) throws IOException {
-		try (RecordStorage_q storage = new RecordStorage_q(fileName)) {
+		try (RecordStorage storage = new RecordStorage(fileName)) {
 			for (int k = COUNT - 1; k >= 0; k--) {
 				Record expected = generateRecord(k);
 				Record actual = storage.read(k);
