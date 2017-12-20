@@ -1,9 +1,9 @@
 package katrenich.pattrens.FactoryMethod;
 
 
-public class SamsungFactory implements MobileFactory {
+public class NokiaMaker implements TelephoneMaker {
 	@Override
 	public MobilePhone createPhone() {
-		return new SumsungMobilePhone();
+		return new NokiaMobilePhone();
 	}
 }

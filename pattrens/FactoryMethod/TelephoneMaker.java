@@ -1,6 +1,6 @@
 package katrenich.pattrens.FactoryMethod;
 
 
-public interface MobileFactory {
+public interface TelephoneMaker {
 	MobilePhone createPhone();
 }
