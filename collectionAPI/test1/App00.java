@@ -19,7 +19,7 @@ public class App00 {
 		double[] d1 = new double[]{1.005, 2.004, 3.04};
 		EntityB entityB1 = new EntityB(s, d);
 		EntityB entityB2 = new EntityB(s1, d1);
-		System.out.println("HeshCode: " + entityB1.hashCode());
+		System.out.println("HashCode: " + entityB1.hashCode());
 		System.out.println("Equals: " + entityB1.equals(entityB2));
 		System.out.println(entityB1);
 	}
